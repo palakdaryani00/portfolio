@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Palak Daryani – Business Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1a1a2e;
+      --ink-soft: #3d3d5c;
+      --ink-muted: #7a7a99;
+      --accent: #5c6bc0;
+      --accent-light: #e8eaf6;
+      --gold: #c9a84c;
+      --bg: #f9f9fc;
+      --white: #ffffff;
+      --border: #e2e2ef;
+      --success: #2e7d5e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,249,252,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--ink-soft);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      background: linear-gradient(135deg, #f9f9fc 0%, #eef0fb 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(92,107,192,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      max-width: 900px;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--ink-soft);
+      max-width: 560px;
+      margin-bottom: 2.4rem;
+      line-height: 1.75;
+    }
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: #4a59b0; border-color: #4a59b0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-outline:hover { background: var(--accent-light); }
+    .btn-gold {
+      background: transparent; color: var(--gold);
+      border: 2px solid var(--gold);
+    }
+    .btn-gold:hover { background: #fdf8ed; }
+
+    /* ── STATS BAR ── */
+    .stats {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      padding: 2.5rem 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--ink-muted); text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: var(--accent);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text { font-size: 1rem; color: var(--ink-soft); line-height: 1.8; }
+    .about-contact {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; color: var(--ink-soft);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon { font-size: 1.1rem; }
+    .contact-item a { color: var(--accent); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* ── SKILLS ── */
+    #skills { background: #f0f2fb; border-radius: 16px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { box-shadow: 0 6px 24px rgba(92,107,192,0.12); transform: translateY(-2px); }
+    .skill-card h4 {
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .skill-card p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+    .exp-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-meta { padding-top: 0.2rem; }
+    .exp-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--ink-muted);
+      margin-bottom: 0.4rem;
+    }
+    .exp-company {
+      font-weight: 600; font-size: 0.92rem; color: var(--ink);
+    }
+    .exp-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem; color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: 0.9rem; color: var(--ink-soft);
+      padding: 0.3rem 0 0.3rem 1.4rem;
+      position: relative; line-height: 1.65;
+    }
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent); font-size: 0.8rem;
+      top: 0.42rem;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+    .ach-card {
+      background: var(--white);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 1.4rem 1.6rem;
+      font-size: 0.92rem; color: var(--ink-soft); line-height: 1.7;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-row {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+    }
+    .cert-pill {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--accent-light);
+      border: 1px solid #c5caed;
+      border-radius: 100px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem; font-weight: 500; color: var(--accent);
+    }
+
+    /* ── LINKS SECTION ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .link-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .link-card:hover { box-shadow: 0 8px 28px rgba(92,107,192,0.14); transform: translateY(-3px); }
+    .link-icon { font-size: 2rem; }
+    .link-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+    .link-card p { font-size: 0.85rem; color: var(--ink-muted); }
+    .link-card.pending { opacity: 0.55; cursor: default; pointer-events: none; }
+    .pending-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600;
+      background: #fff3cd; color: #856404;
+      border: 1px solid #ffc107;
+      border-radius: 4px; padding: 0.15rem 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.82rem;
+    }
+    footer span { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Palak Daryani</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#links">Links</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Business Analyst · P&amp;C Insurance &amp; Reinsurance</div>
+    <h1>Hi, I'm <em>Palak</em><br>Daryani.</h1>
+    <p class="hero-sub">
+      I bridge business and technology — translating complex requirements into scalable, efficient solutions. Specialising in P&amp;C Insurance, Reinsurance, and data-driven decision making.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="https://www.linkedin.com/in/palak-daryani-7b2535209/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      <a href="#links" class="btn btn-gold">Assignment (Coming Soon)</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats">
+  <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Years Experience</span></div>
+  <div class="stat"><span class="stat-num">50%</span><span class="stat-label">Process Efficiency Gain</span></div>
+  <div class="stat"><span class="stat-num">80%</span><span class="stat-label">Defect Reduction</span></div>
+  <div class="stat"><span class="stat-num">4</span><span class="stat-label">Certifications</span></div>
+  <div class="stat"><span class="stat-num">0</span><span class="stat-label">High-Severity Post-Deploy Defects</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">About Me</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a Business Analyst with strong experience in <strong>P&amp;C Insurance and Reinsurance</strong>, currently working as an Associate Consultant at Sapiens. I specialise in requirements gathering, process analysis, and data-driven decision making.</p>
+      <br/>
+      <p>My work spans formalising BRDs, FRDs, user stories and acceptance criteria, mapping as-is/to-be processes, analysing data flows, and defining KPIs — always with a focus on end-to-end alignment across cross-functional teams.</p>
+      <br/>
+      <p>I hold certifications in <strong>Lean Six Sigma Green Belt, PMI-PBA, Microsoft SQL &amp; Power BI</strong>, and am a <strong>Certified Scrum Product Owner</strong>.</p>
+    </div>
+    <div class="about-contact">
+      <div class="contact-item"><span class="contact-icon">📞</span> 8318717322</div>
+      <div class="contact-item"><span class="contact-icon">✉️</span> <a href="mailto:palakdaryani00@gmail.com">palakdaryani00@gmail.com</a></div>
+      <div class="contact-item"><span class="contact-icon">💼</span> <a href="https://www.linkedin.com/in/palak-daryani-7b2535209/" target="_blank">LinkedIn Profile ↗</a></div>
+      <div class="contact-item"><span class="contact-icon">🎓</span> PG Diploma, BIMTECH</div>
+      <div class="contact-item"><span class="contact-icon">📍</span> India</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="max-width:100%; padding: 5rem 5%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">What I bring</div>
+    <div class="section-title">Skills &amp; Expertise</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Business Analysis</h4>
+        <p>Requirements elicitation, documentation, process modelling, business rules, functional specifications.</p>
+      </div>
+      <div class="skill-card">
+        <h4>Insurance Expertise</h4>
+        <p>Property &amp; Casualty Insurance, Reinsurance, and business application consulting.</p>
+      </div>
+      <div class="skill-card">
+        <h4>Stakeholder Management</h4>
+        <p>Workshops, facilitation, cross-functional collaboration, and conflict resolution.</p>
+      </div>
+      <div class="skill-card">
+        <h4>Process &amp; Data Analysis</h4>
+        <p>As-is/to-be process mapping, workflow optimisation, KPIs and dashboard design.</p>
+      </div>
+      <div class="skill-card">
+        <h4>Testing &amp; QA</h4>
+        <p>UAT planning &amp; execution, defect triaging, severity analysis, post-release validation.</p>
+      </div>
+      <div class="skill-card">
+        <h4>Tools &amp; Tech</h4>
+        <p>JIRA · Confluence · SQL · Power BI · MS Office · Visio · Figma</p>
+      </div>
+      <div class="skill-card">
+        <h4>Delivery &amp; Governance</h4>
+        <p>Agile SCRUM, UAT planning, defect log management, change management support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Where I've worked</div>
+  <div class="section-title">Experience</div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Apr 2023 – Present</div>
+        <div class="exp-company">Sapiens</div>
+      </div>
+      <div>
+        <div class="exp-role">Associate Consultant</div>
+        <ul class="exp-bullets">
+          <li>Analysed business requirements through workshops, translating them into clear, testable user stories aligned with business application design.</li>
+          <li>Mapped as-is and to-be processes, optimised workflows and improved end-to-end data flows, increasing process efficiency by 50% and reducing defects by 80%.</li>
+          <li>Led UAT planning, test case walkthroughs and defect triage, resulting in zero high-severity defects post-deployment.</li>
+          <li>Facilitated sprint ceremonies and backlog refinement, improving sprint delivery efficiency from 30% to 90%.</li>
+          <li>Designed UI prototypes in Figma and collaborated with development and QA teams, reducing transaction cycle time by 65%.</li>
+          <li>Created process documentation, change-impact assessments, and training materials to support adoption of new system functionalities.</li>
+          <li>Redesigned workflows and validation rules, cutting manual effort by 70% and enabling higher transaction volumes without additional headcount.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">May 2022 – Jul 2022</div>
+        <div class="exp-company">Integrated Risk Insurance Brokers</div>
+      </div>
+      <div>
+        <div class="exp-role">Management Trainee</div>
+        <ul class="exp-bullets">
+          <li>Understood client requirements about coverage benefits expected in the product.</li>
+          <li>Prepared and disseminated RFQs to Insurance companies to draw competitive quotes.</li>
+          <li>Analysed quotes and negotiated policy terms and prices with Insurance companies.</li>
+          <li>Assisted in client meetings and pitched the concept of Ergonomics to Corporate clients.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" style="background:#f0f2fb; border-radius:16px; max-width:100%; padding:5rem 5%;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-label">Impact I've made</div>
+    <div class="section-title">Achievements</div>
+    <div class="achievements-grid">
+      <div class="ach-card">Recognised by senior stakeholders as the single point of contact across business, product, and development teams — cutting rework by 95% and ensuring on-time delivery of critical releases.</div>
+      <div class="ach-card">Mentored junior BAs to translate business requirements into scalable product features, ensuring smooth delivery within Agile sprints.</div>
+      <div class="ach-card">Led impact analysis and requirement governance for high-risk enterprise releases, reducing production defects by 90%.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <div class="section-title">Education &amp; Certifications</div>
+  <div style="margin-bottom:2rem;">
+    <div style="font-weight:600; color:var(--ink); margin-bottom:0.4rem;">Post Graduate Diploma in Insurance Business Management</div>
+    <div style="color:var(--ink-muted); font-size:0.9rem;">Birla Institute of Management Technology · Aug 2021 – Apr 2023</div>
+  </div>
+  <div style="margin-bottom:2rem;">
+    <div style="font-weight:600; color:var(--ink); margin-bottom:0.4rem;">Bachelor of Business Administration</div>
+    <div style="color:var(--ink-muted); font-size:0.9rem;">July 2018 – June 2021</div>
+  </div>
+  <div class="cert-row">
+    <div class="cert-pill">🏅 Lean Six Sigma Green Belt – KPMG</div>
+    <div class="cert-pill">📊 PMI-PBA</div>
+    <div class="cert-pill">🗄️ Microsoft SQL</div>
+    <div class="cert-pill">📈 Power BI</div>
+    <div class="cert-pill">🔄 Certified Scrum Product Owner</div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="section-label">Find me online</div>
+  <div class="section-title">My Links</div>
+  <div class="links-grid">
+
+    <a href="https://www.linkedin.com/in/palak-daryani-7b2535209/" target="_blank" class="link-card">
+      <div class="link-icon">💼</div>
+      <h3>LinkedIn Profile</h3>
+      <p>Connect with me professionally and view my full work history.</p>
+    </a>
+
+    <div class="link-card pending">
+      <div class="link-icon">📄</div>
+      <h3>Assignment</h3>
+      <p>My assignment submission will be linked here soon.</p>
+      <span class="pending-tag">⏳ Coming Soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Palak Daryani</span> · Business Analyst · Built with care</p>
+</footer>
+
+</body>
+</html>
